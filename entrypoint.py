@@ -1,0 +1,1 @@
+from okr.app import app
