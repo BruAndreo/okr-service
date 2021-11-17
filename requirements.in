@@ -1,3 +1,6 @@
 #service
 fastapi
 uvicorn[standard]
+
+#database
+pymongo

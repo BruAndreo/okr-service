@@ -20,6 +20,8 @@ idna==3.3
     # via anyio
 pydantic==1.8.2
     # via fastapi
+pymongo==3.12.1
+    # via -r requirements.in
 python-dotenv==0.19.1
     # via uvicorn
 pyyaml==6.0
