@@ -13,6 +13,6 @@ async def create_user(user: User):
 
     ret = db.users.insert_one(user.dict())
 
-    # print(ret.inserted_id)
+    print(ret.inserted_id)
 
     return {"user_id": ret.inserted_id}
