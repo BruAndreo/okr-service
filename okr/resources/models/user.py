@@ -1,4 +1,4 @@
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, validator
 from bson import ObjectId
 import datetime
 
@@ -23,5 +23,12 @@ class User(BaseModel):
     name: str
     email: str
     password: str
-    birth_date: str
+    birthdate: datetime.date
     created_at: datetime.datetime = datetime.datetime.now()
+
+    @validator("birthdate", pre=True)
+    def parse_birthdate(cls, value):
+        return datetime.datetime.strptime(
+            value,
+            "%d/$m/%Y"
+        ).date()
