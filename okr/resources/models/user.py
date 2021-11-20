@@ -1,34 +1,17 @@
-from pydantic import BaseModel, Field, validator
+from pydantic import BaseModel, validator
 from bson import ObjectId
 import datetime
-
-class PyObjectId(ObjectId):
-    """ Custom Type for reading MongoDB IDs """
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
-
-    @classmethod
-    def validate(cls, v):
-        if not ObjectId.is_valid(v):
-            raise ValueError("Invalid object_id")
-        return ObjectId(v)
-
-    @classmethod
-    def __modify_schema__(cls, field_schema):
-        field_schema.update(type="string")
+import uuid
+import okr.utils.crypt as crypt
 
 class User(BaseModel):
-    user_id: PyObjectId = Field(default_factory=PyObjectId, alias="_id")
+    user_id: str = str(uuid.uuid4())
     name: str
     email: str
     password: str
-    birthdate: datetime.date
+    birthdate: datetime.datetime
     created_at: datetime.datetime = datetime.datetime.now()
 
-    @validator("birthdate", pre=True)
-    def parse_birthdate(cls, value):
-        return datetime.datetime.strptime(
-            value,
-            "%d/$m/%Y"
-        ).date()
+    @validator("password")
+    def crypt_password(cls, value):
+        return crypt.encrypt(value)
