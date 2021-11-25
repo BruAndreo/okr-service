@@ -1,8 +1,9 @@
-FROM python:3.8.12-buster
+FROM python:3.8.12-slim
 
-COPY . . 
+COPY . ./app
+WORKDIR /app
 
-CMD pip install -r requirements.txt
+RUN pip install -r requirements.txt
 
 EXPOSE 3000
-ENTRYPOINT [ "uvicorn entrypoint:app --port 3000 --reload" ]
+CMD python entrypoint.py
