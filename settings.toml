@@ -5,3 +5,4 @@ log_level = "info"
 [database]
 host = "localhost"
 port = 27017
+collection = "okrs"

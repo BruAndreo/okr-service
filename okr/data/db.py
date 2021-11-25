@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+from okr.config import settings
 
-client = MongoClient('localhost', 27017)
-db = client['okrs']
+client = MongoClient(settings.database.host, settings.database.port)
+db = client[settings.database.collection]
