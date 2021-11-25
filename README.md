@@ -7,6 +7,7 @@ API service for OKRs
 Before cloning the project for your workspace, enter in the directory.
 
 First install the dependencies
+
 *It's recommend use `virtualenv` to install dependencies and use this project.*
 ```SHELL
 pip3 install -r requirements.txt
