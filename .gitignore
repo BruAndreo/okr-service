@@ -276,3 +276,5 @@ dmypy.json
 cython_debug/
 
 .python-version
+# Ignore dynaconf secret files
+.secrets.*

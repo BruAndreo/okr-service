@@ -1,0 +1,7 @@
+[app]
+port = 3000
+log_level = "info"
+
+[database]
+host = "localhost"
+port = 27017

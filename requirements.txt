@@ -10,6 +10,8 @@ asgiref==3.4.1
     # via uvicorn
 click==8.0.3
     # via uvicorn
+dynaconf==3.1.7
+    # via -r requirements.in
 fastapi==0.70.0
     # via -r requirements.in
 h11==0.12.0
@@ -32,6 +34,8 @@ starlette==0.16.0
     # via fastapi
 typing-extensions==3.10.0.2
     # via pydantic
+uuid==1.30
+    # via -r requirements.in
 uvicorn[standard]==0.15.0
     # via -r requirements.in
 uvloop==0.16.0
