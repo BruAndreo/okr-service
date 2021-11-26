@@ -35,6 +35,13 @@ And finally, run the container
 docker run -p 3000:3000 --network host okr-service-container
 ```
 
+## Run with Docker Compose
+
+It's possible to use docker-compose too. Just execute the command
+```SHELL
+docker-compose up
+```
+
 ## Endpoints and Docs
 
 After the server running, put `http://localhost:{APP_PORT_IN_DOTENV}/docs` in your navigator.
