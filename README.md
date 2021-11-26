@@ -21,6 +21,20 @@ To initialize the server, run the `entrypoint.py`
 python3 entrypoint.py
 ```
 
+## Run in a Docker container
+
+To run the project in a docker container, you need to clone and generate your `.env`.
+
+After this steps, build de container
+```SHELL
+docker build -t okr-service-container .
+```
+
+And finally, run the container
+```SHELL
+docker run -p 3000:3000 --network host okr-service-container
+```
+
 ## Endpoints and Docs
 
 After the server running, put `http://localhost:{APP_PORT_IN_DOTENV}/docs` in your navigator.
