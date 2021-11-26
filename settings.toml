@@ -1,5 +1,6 @@
 [app]
 log_level = "info"
+reload = true
 
 [database]
 collection = "okrs"
