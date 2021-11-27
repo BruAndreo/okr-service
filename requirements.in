@@ -8,3 +8,6 @@ pymongo
 #utils
 uuid
 dynaconf
+
+#authentication
+pyjwt
