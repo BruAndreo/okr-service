@@ -12,5 +12,4 @@ router = APIRouter(
 async def auth(auth: AuthBody):
     user = User()
     auth_token = user.authenticate_user(auth)
-    print(auth_token)
-    return { "token": "abc-123" }
+    return { "token": auth_token }

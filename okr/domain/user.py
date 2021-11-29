@@ -1,3 +1,4 @@
+from fastapi.encoders import jsonable_encoder
 from okr.resources.schemas.auth import AuthBody
 from okr.resources.schemas.user import UserBody
 from okr.domain.models.user import User as UserModel
@@ -16,14 +17,14 @@ class User:
     def _generate_user_id(self) -> str:
         return str(uuid.uuid4())
 
-    async def authenticate_user(self, auth: AuthBody):
-        user = await db.users.find_one({ "email": auth.email, "password": auth.password })
-        print(type(user))
+    def authenticate_user(self, auth: AuthBody):
+        user = db["users"].find_one({ "email": auth.email, "password": auth.password })
+        usr = UserModel(**user)
         if not user:
             raise Exception("Not found user")
-        return jwt.encode({
-            "user_id": user.user_id,
-            "username": user.name,
-            "email": user.email,
-            "birthdate": user.birthdate
-        }, "secret", algorithm="HS256")
+        return jwt.encode(jsonable_encoder({
+            "user_id": usr.user_id,
+            "username": usr.name,
+            "email": usr.email,
+            "birthdate": usr.birthdate
+        }), "secret", algorithm="HS256")
