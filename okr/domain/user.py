@@ -1,11 +1,11 @@
-from fastapi.encoders import jsonable_encoder
 from okr.resources.schemas.auth import AuthBody
 from okr.resources.schemas.user import UserBody
 from okr.domain.models.user import User as UserModel
 from okr.data.db import db
+from okr.utils.jwt import JWT
 
 import uuid
-import jwt
+
 
 class User:
 
@@ -22,9 +22,9 @@ class User:
         usr = UserModel(**user)
         if not user:
             raise Exception("Not found user")
-        return jwt.encode(jsonable_encoder({
+        return JWT.generate({
             "user_id": usr.user_id,
             "username": usr.name,
             "email": usr.email,
             "birthdate": usr.birthdate
-        }), "secret", algorithm="HS256")
+        })
