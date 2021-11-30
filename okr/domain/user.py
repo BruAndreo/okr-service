@@ -19,12 +19,12 @@ class User:
 
     def authenticate_user(self, auth: AuthBody):
         user = db["users"].find_one({ "email": auth.email, "password": auth.password })
-        usr = UserModel(**user)
+        
         if not user:
             raise Exception("Not found user")
         return JWT.generate({
-            "user_id": usr.user_id,
-            "username": usr.name,
-            "email": usr.email,
-            "birthdate": usr.birthdate
+            "user_id": user.get('user_id'),
+            "username": user.get('name'),
+            "email": user.get('email'),
+            "birthdate": user.get('birthdate')
         })
