@@ -2,7 +2,8 @@ import json
 from typing import Dict
 from fastapi.encoders import jsonable_encoder
 import jwt
-from okr.utils.timers import Timers 
+from okr.utils.timers import Timers
+from okr.config import settings
 
 class JWT:
     
@@ -13,6 +14,6 @@ class JWT:
                 **payload, 
                 "exp": Timers.add_minutes_actual_time(30)
             }),
-            key="secret", 
-            algorithm="HS256"
+            key=settings.auth.secret,
+            algorithm=settings.auth.algorithm
         )

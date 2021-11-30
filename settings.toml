@@ -2,5 +2,8 @@
 log_level = "info"
 reload = true
 
+[auth]
+algorithm = "HS256"
+
 [database]
 collection = "okrs"
