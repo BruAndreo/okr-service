@@ -12,7 +12,7 @@ class JWT:
         return jwt.encode(
             payload=jsonable_encoder({
                 **payload, 
-                "exp": Timers.add_minutes_actual_time(30)
+                "exp": Timers.add_minutes_actual_time(settings.auth.expires_in_minutes)
             }),
             key=settings.auth.secret,
             algorithm=settings.auth.algorithm
