@@ -1,9 +1,9 @@
-import json
 from typing import Dict
 from fastapi.encoders import jsonable_encoder
-import jwt
 from okr.utils.timers import Timers
 from okr.config import settings
+
+import jwt
 
 class JWT:
     
