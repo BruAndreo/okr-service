@@ -4,7 +4,7 @@ reload = true
 
 [auth]
 algorithm = "HS256"
-EXPIRES_IN_MINUTES = 30
+expires_in_minutes = 30
 
 [database]
-collection = "okrs"
+db_name = "okrs"
