@@ -3,6 +3,7 @@ from okr.resources.schemas.user import UserBody
 from okr.domain.models.user import User as UserModel
 from okr.data.db import db
 from okr.utils.jwt import JWT
+from okr.domain.repositories.user_repository import UserRepository
 
 import uuid
 
@@ -11,14 +12,16 @@ class User:
 
     def create_user(self, user_body: UserBody):
         user = UserModel(**user_body, user_id=self._generate_user_id())
-        db.users.insert(user.dict())
+        user_repo = UserRepository()
+        user_repo.insert_user(user)
         return user.user_id
 
     def _generate_user_id(self) -> str:
         return str(uuid.uuid4())
 
     def authenticate_user(self, auth: AuthBody):
-        user = db["users"].find_one({ "email": auth.email, "password": auth.password })
+        user_repo = UserRepository()
+        user = user_repo.find_by_auth(auth.email, auth.password)
         
         if not user:
             raise Exception("Not found user")
