@@ -22,7 +22,7 @@ class User:
     def authenticate_user(self, auth: AuthBody):
         user_repo = UserRepository()
         user = user_repo.find_by_auth(auth.email, auth.password)
-        
+
         if not user:
             raise Exception("Not found user")
         return JWT.generate({

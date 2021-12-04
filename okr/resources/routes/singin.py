@@ -1,6 +1,6 @@
 from fastapi import APIRouter, status
 from okr.resources.schemas.user import UserBody
-from okr.domain.user import User
+from okr.domain.services.user import User
 
 router = APIRouter(
     prefix="/singin",

@@ -1,6 +1,6 @@
 from fastapi import APIRouter
 from okr.resources.schemas.auth import AuthBody
-from okr.domain.user import User
+from okr.domain.services.user import User
 
 router = APIRouter(
     prefix="/auth",
