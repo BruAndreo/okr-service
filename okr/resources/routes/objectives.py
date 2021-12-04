@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 from okr.resources.schemas.objectives import NewObjective
 
 router = APIRouter(
@@ -7,7 +7,7 @@ router = APIRouter(
     responses={404: {"error": "Not Found"}}
 )
 
-@router.post("/", summary="Create objetive")
+@router.post("/", summary="Create objetive", status_code=status.HTTP_201_CREATED)
 def create_objective(new_objetive: NewObjective):
     print(new_objetive.dict())
     return { "objective_id": 1 }
