@@ -1,11 +1,13 @@
-from fastapi import APIRouter, status
+from fastapi import APIRouter, status, Depends
+from okr.resources.middlewares.authentication import AuthenticationMiddleware
 from okr.resources.schemas.objectives import NewObjective
 from okr.domain.services.objectives import Objectives
 
 router = APIRouter(
     prefix="/objectives",
     tags=["objectives"],
-    responses={404: {"error": "Not Found"}}
+    responses={404: {"error": "Not Found"}},
+    dependencies=[Depends(AuthenticationMiddleware())]
 )
 
 @router.post("/", summary="Create objetive", status_code=status.HTTP_201_CREATED)
