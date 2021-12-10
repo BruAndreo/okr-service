@@ -17,3 +17,12 @@ class JWT:
             key=settings.auth.secret,
             algorithm=settings.auth.algorithm
         )
+
+    @staticmethod
+    def decode(token: str):
+        try:
+            return jwt.decode(token, key=settings.auth.secret, algorithms=[settings.auth.algorithm])
+        except jwt.ExpiredSignatureError:
+            raise Exception("Epired token")
+        except (jwt.InvalidSignatureError, jwt.InvalidTokenError):
+            raise Exception("Invalid token")

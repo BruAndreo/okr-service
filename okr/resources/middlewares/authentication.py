@@ -1,5 +1,6 @@
-from fastapi import Request, HTTPException
+from fastapi import Request, HTTPException, status
 from fastapi.security import HTTPBearer
+from okr.utils.jwt import JWT
 
 class AuthenticationMiddleware(HTTPBearer):
 
@@ -8,10 +9,20 @@ class AuthenticationMiddleware(HTTPBearer):
 
     async def __call__(self, request: Request):
         credentials = await super(AuthenticationMiddleware, self).__call__(request)
-        if credentials:
-            if not credentials.scheme == "Bearer":
-                raise HTTPException(status_code=403, detail="Invalid Authentication Scheme")
+        if not credentials:
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid authorization code")
+
+        if not self._is_bearer(credentials.scheme):
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid Authentication Scheme")
+        
+        try:
             print(credentials.credentials)
-            # TODO: Created JWT decode validation and raise exceptions when invalid
-        else:
-            raise HTTPException(status_code=403, detail="Invalid authorization code")
+            decoded_token = JWT.decode(credentials.credentials)
+            print(decoded_token)
+        except Exception as err:
+            print(err)
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=err)
+
+
+    def _is_bearer(self, scheme):
+        return scheme == "Bearer"
