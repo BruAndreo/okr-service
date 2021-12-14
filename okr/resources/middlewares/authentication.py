@@ -21,7 +21,7 @@ class AuthenticationMiddleware(HTTPBearer):
             print(decoded_token)
         except Exception as err:
             print(err)
-            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=err)
+            raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(err))
 
 
     def _is_bearer(self, scheme):
