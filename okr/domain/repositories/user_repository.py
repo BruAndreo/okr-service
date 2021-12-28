@@ -10,7 +10,7 @@ class UserRepository(MongoBuilder):
         super().__init__(self._collection)
 
     def insert_user(self, user: User):
-        return self._conn.insert_one(user.dict())
+        return self.insert_one(user.dict())
 
     def find_by_auth(self, email, password):
         return self._conn.find_one({ "email": email, "password": password })
