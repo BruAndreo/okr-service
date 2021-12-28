@@ -16,9 +16,8 @@ class AuthenticationMiddleware(HTTPBearer):
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail="Invalid Authentication Scheme")
         
         try:
-            print(credentials.credentials)
             decoded_token = JWT.decode(credentials.credentials)
-            print(decoded_token)
+            request.state.token = decoded_token
         except Exception as err:
             print(err)
             raise HTTPException(status_code=status.HTTP_403_FORBIDDEN, detail=str(err))
