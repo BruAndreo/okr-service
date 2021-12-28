@@ -1,4 +1,4 @@
-from okr.domain.repositories.objetive_repository import ObjectiveRepository
+from okr.domain.repositories.objective_repository import ObjectiveRepository
 from okr.resources.schemas.objectives import NewObjective
 from okr.domain.models.objectives import Objectives as ObjectivesModel
 
