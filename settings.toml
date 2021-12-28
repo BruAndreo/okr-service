@@ -9,3 +9,4 @@ expires_in_minutes = 30
 [database]
 db_name = "okrs"
 user_collection = "users"
+objective_collection = "objectives"
